@@ -41,7 +41,7 @@ En la base de datos tenemos el hash de Tobias:
 55c8[REDACTED]061d
 
 
-![](Nocturnal/nmap.png)
+![](Nocturnal/Screenshot From 2025-07-13 11-13-03.png)
   cracked in crackstation: slowmotionapocalypse
 
   users:
