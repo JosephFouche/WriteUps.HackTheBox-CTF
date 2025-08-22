@@ -55,8 +55,13 @@ El puerto 8080 aloja otro sitio web
 Reenviado mediante SSH tobias@nocturnal.htb -L 8081:127.0.0.1:8080
 
 # HTTP - 127.0.0.1:8080
+![](Nocturnal/CVE.png)
+Servicio SPconfig, aplicación de administración del servidor.
+Podemos acceder usando el usuario predeterminado admin y slowmotionapocalypse como contraseña.
+Encontramos CVE-2023-46818 (https://github.com/bipbopbup/CVE-2023-46818-python-exploit/raw/refs/heads/main/exploit.py).
+Para acceder como root, ejecutamos:
 
-
+python3 exploit.py http://127.0.0.1:8081/ admin sl[REDACTED]se
 
 
 
