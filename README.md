@@ -48,6 +48,14 @@ En la base de datos tenemos el hash de Tobias:
         amanda:a[REDACTED]1J
         tobias:s[REDACTED]e
 # ssh - tobias
+![](Nocturnal/tobias.png)
+Acceso de usuario como Tobias
+Sendmail SUID extraño (no importante)
+El puerto 8080 aloja otro sitio web
+Reenviado mediante SSH tobias@nocturnal.htb -L 8081:127.0.0.1:8080
+
+# HTTP - 127.0.0.1:8080
+
 
 
 
