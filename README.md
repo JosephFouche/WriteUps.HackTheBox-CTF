@@ -41,12 +41,14 @@ En la base de datos tenemos el hash de Tobias:
 55c8[REDACTED]061d
 
 
-![](Nocturnal/Screenshot From 2025-07-13 11-13-03.png)
+![](Nocturnal/crakstation.png)
   cracked in crackstation: slowmotionapocalypse
 
   users:
         amanda:a[REDACTED]1J
         tobias:s[REDACTED]e
+# ssh - tobias
+
 
 
 
