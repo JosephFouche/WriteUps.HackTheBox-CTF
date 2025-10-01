@@ -3,6 +3,7 @@
 Fecha: 2025-05-28
 Autor: HYH — entusiasta de ciberseguridad, pentesting y CTF.
 
+
 Info de la máquina (Box Info)
 
 SO: Windows.
