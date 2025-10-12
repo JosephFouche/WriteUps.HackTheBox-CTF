@@ -1,9 +1,11 @@
-#First we do the nmap routine
+# First we do the nmap routine
 What we see is: 
-	Starting Nmap 7.95 ( https://nmap.org ) at 2025-10-11 16:04 -03
+
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-10-11 16:04 -03
 Nmap scan report for voleur.htb (10.10.11.76)
 Host is up (0.21s latency).
 Not shown: 65516 filtered tcp ports (no-response)
+
 PORT      STATE SERVICE       VERSION
 53/tcp    open  domain        Simple DNS Plus
 88/tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2025-10-12 03:12:58Z)
