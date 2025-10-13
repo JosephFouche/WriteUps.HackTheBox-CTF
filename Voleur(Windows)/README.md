@@ -158,7 +158,7 @@ INFO: Found 0 trusts
 INFO: Starting computer enumeration with 10 workers
 INFO: Querying computer: DC.voleur.htb
 
-![Texto alternativo](FirstVoleur.drawio.png)
+![Texto alternativo](WriteUps.HackTheBox-CTF/FirstVoleur.drawio.png)
 
 
 
