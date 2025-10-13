@@ -158,7 +158,8 @@ INFO: Found 0 trusts
 INFO: Starting computer enumeration with 10 workers
 INFO: Querying computer: DC.voleur.htb
 
-<image-card alt="Texto alternativo" src="FirstVoleur.drawio.png" ></image-card>
+![Texto alternativo](nombre_del_archivo.png)
+
 
 
 
