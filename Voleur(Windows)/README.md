@@ -62,3 +62,6 @@ Host script results:
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 589.54 seconds
+
+# Se procede con actualizacion de reloj y pedido de ticket de kerberos despues de exporta a carpeta de ctf
+pasamos a hace ldap y smb y recolectamos con bloodhound
