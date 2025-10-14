@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 JustImages/
 PuppySensitiveData/
 PuppyShrareBloodHoundData/
@@ -5,3 +6,6 @@ Nocturnal/
 *.log
 *.tmp
 JustImages/Puppy(Windows)/keepass4brute/
+=======
+*.zip
+>>>>>>> d307be7 (Actualización: Diagrama FirstVoleur.drawio y README.md para Voleur)
